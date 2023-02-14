@@ -2,26 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+struct TravelBacktrack
+{
+    public Vector3 position { get; }
+    public Vector2 normalized_direction { get; }
+    public GameObject joint_object { get; }
+    public Joint joint { get; }
+
+    public TravelBacktrack(Vector3 position_, Vector2 normalized_direction_, GameObject joint_object_)
+    {
+        position = position_;
+        normalized_direction = normalized_direction_;
+        joint_object = joint_object_;
+        joint = joint_object.GetComponent<Joint>();
+        joint.begin = position_;
+        joint.end = position_;
+    }
+}
+
 public class PlayerController : MonoBehaviour
 {
     public GameObject plane;
+    public GameObject joint_prefab;
+
     private BoxCollider plane_collider;
-    private const float travel_speed = 0.2f;
-    private const uint save_tick_resolution = 10;
+    private const float travel_speed = 0.1f;
+    private const uint save_tick_resolution = 5;
     private uint save_tick = 0;
 
-    //  (previous position, normalized direction)
-    private Stack<(Vector3, Vector2)> past_travels;
+    private Stack<TravelBacktrack> past_travels;
 
     void Start()
     {
-        past_travels = new Stack<(Vector3, Vector2)>();
-        past_travels.Push((transform.position, Vector2.zero));
         plane_collider = plane.GetComponent<BoxCollider>();
+        past_travels = new Stack<TravelBacktrack>();
+
+        var initial_joint = Instantiate(joint_prefab);
+        past_travels.Push(new TravelBacktrack(transform.position, Vector2.zero, initial_joint));
     }
 
     void Update()
     {
+        //  Left Click: Move Forward.
         Ray ray;
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -34,25 +56,30 @@ public class PlayerController : MonoBehaviour
 
             if (save_tick == save_tick_resolution)
             {
-                past_travels.Push((transform.position, travel));
+                var joint = Instantiate(joint_prefab);
+                past_travels.Push(new TravelBacktrack(transform.position, travel, joint));
                 save_tick = 0;
             }
 
             save_tick += 1;
         }
 
+        //  Right Click: Move Backward.
         if (Input.GetMouseButton(1))
         {
-            if (past_travels.Count > 0)
+            var travel = past_travels.Peek();
+            transform.Translate(-new Vector3(travel.normalized_direction.x, 0, travel.normalized_direction.y).normalized * travel_speed);
+            if (past_travels.Count != 1 && VectorHasPassedPosition(travel.position, travel.normalized_direction, transform.position))
             {
-                var (position, direction) = past_travels.Peek();
-                transform.Translate(-new Vector3(direction.x, 0, direction.y).normalized * travel_speed);
-                if (past_travels.Count != 1 && VectorHasPassedPosition(position, direction, transform.position))
-                {
-                    past_travels.Pop();
-                }
-
+                Destroy(travel.joint_object);
+                past_travels.Pop();
             }
+        }
+
+        //  Update joint end.
+        {
+            var travel = past_travels.Peek();
+            travel.joint.end = transform.position;
         }
     }
 
