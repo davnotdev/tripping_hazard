@@ -7,6 +7,8 @@ public class Joint : MonoBehaviour
     public Vector3 begin;
     public Vector3 end;
 
+    private const float joint_length_multiplier = 1.1f;
+
     void Start()
     {
 
@@ -18,7 +20,7 @@ public class Joint : MonoBehaviour
         var center = new Vector3(begin.x + end.x, transform.position.y, begin.z + end.z) / 2;
 
         transform.position = center;
-        transform.localScale = new Vector3(0.1f, diff.magnitude / 2, 0.1f);
+        transform.localScale = new Vector3(transform.localScale.x, (diff.magnitude / 2) * joint_length_multiplier, transform.localScale.z);
         //  Because I can.
         var θ = diff.z == 0
             ? 0
