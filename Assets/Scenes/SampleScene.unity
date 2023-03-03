@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 497714510}
   m_Layer: 0
   m_Name: CubeEast
-  m_TagString: Untagged
+  m_TagString: WallEast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -410,6 +410,8 @@ GameObject:
   - component: {fileID: 1071034719}
   - component: {fileID: 1071034718}
   - component: {fileID: 1071034717}
+  - component: {fileID: 1071034721}
+  - component: {fileID: 1071034722}
   m_Layer: 0
   m_Name: Victim1
   m_TagString: Untagged
@@ -495,6 +497,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1071034721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071034716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e46b4d79c51c891a7a6bdb77482b2378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &1071034722
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071034716}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &1535830805
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,6 +537,8 @@ GameObject:
   - component: {fileID: 1535830808}
   - component: {fileID: 1535830807}
   - component: {fileID: 1535830806}
+  - component: {fileID: 1535830810}
+  - component: {fileID: 1535830811}
   m_Layer: 0
   m_Name: Victim2
   m_TagString: Untagged
@@ -592,6 +624,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1535830810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535830805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e46b4d79c51c891a7a6bdb77482b2378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &1535830811
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535830805}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &1662664481
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,7 +759,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1662664481}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 20, y: 2.220446e-16, z: 20}
@@ -718,7 +778,7 @@ GameObject:
   - component: {fileID: 1695724274}
   m_Layer: 0
   m_Name: CubeSouth
-  m_TagString: Untagged
+  m_TagString: WallSouth
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -815,7 +875,7 @@ GameObject:
   - component: {fileID: 1746873667}
   m_Layer: 0
   m_Name: CubeWest
-  m_TagString: Untagged
+  m_TagString: WallWest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -910,9 +970,10 @@ GameObject:
   - component: {fileID: 1766600456}
   - component: {fileID: 1766600455}
   - component: {fileID: 1766600454}
+  - component: {fileID: 1766600458}
   m_Layer: 0
   m_Name: CubeNorth
-  m_TagString: Untagged
+  m_TagString: WallNorth
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -995,6 +1056,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!54 &1766600458
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766600453}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &2008183105
 GameObject:
   m_ObjectHideFlags: 0
@@ -1007,6 +1084,7 @@ GameObject:
   - component: {fileID: 2008183108}
   - component: {fileID: 2008183107}
   - component: {fileID: 2008183106}
+  - component: {fileID: 2008183110}
   m_Layer: 0
   m_Name: Objective1
   m_TagString: Untagged
@@ -1092,6 +1170,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2008183110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008183105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b0e7bd33bff74a239c4b893141c3d6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2010160960
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,6 +1194,8 @@ GameObject:
   - component: {fileID: 2010160963}
   - component: {fileID: 2010160962}
   - component: {fileID: 2010160961}
+  - component: {fileID: 2010160965}
+  - component: {fileID: 2010160966}
   m_Layer: 0
   m_Name: Victim0
   m_TagString: Untagged
@@ -1189,6 +1281,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2010160965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010160960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e46b4d79c51c891a7a6bdb77482b2378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &2010160966
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010160960}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &2067169041
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,6 +1321,7 @@ GameObject:
   - component: {fileID: 2067169044}
   - component: {fileID: 2067169043}
   - component: {fileID: 2067169042}
+  - component: {fileID: 2067169046}
   m_Layer: 0
   m_Name: Objective0
   m_TagString: Untagged
@@ -1216,7 +1337,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2067169041}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -1286,6 +1407,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2067169046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067169041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b0e7bd33bff74a239c4b893141c3d6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2068657080
 GameObject:
   m_ObjectHideFlags: 0
@@ -1299,9 +1432,10 @@ GameObject:
   - component: {fileID: 2068657082}
   - component: {fileID: 2068657081}
   - component: {fileID: 2068657085}
+  - component: {fileID: 2068657086}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1398,3 +1532,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plane: {fileID: 1662664481}
   joint_prefab: {fileID: 7381904152776664586, guid: 51dd7b54a059c2544a49bad8e611bcae, type: 3}
+--- !u!54 &2068657086
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068657080}
+  serializedVersion: 2
+  m_Mass: 1000000
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
