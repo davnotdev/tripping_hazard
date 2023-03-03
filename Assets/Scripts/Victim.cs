@@ -10,9 +10,18 @@ public class Victim : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var random_x = Random.Range(-1.0f, 1.0f);
-        var random_y = Random.Range(-1.0f, 1.0f);
-        velocity = new Vector2(random_x, random_y);
+        var random_theta = Random.Range(45 - 10, 45 + 10);
+        if (Random.Range(0.0f, 0.5f) < 0.5f)
+        {
+            random_theta *= -1;
+        }
+
+        if (Random.Range(0.0f, 0.5f) < 0.5f)
+        {
+            random_theta += 180;
+        }
+
+        velocity = new Vector2(Mathf.Cos(random_theta), Mathf.Sin(random_theta));
     }
 
     // Update is called once per frame
