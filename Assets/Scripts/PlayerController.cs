@@ -35,7 +35,8 @@ public class PlayerController : MonoBehaviour
         plane_collider = plane.GetComponent<BoxCollider>();
         past_travels = new Stack<TravelBacktrack>();
 
-        var initial_joint = Instantiate(joint_prefab);
+        var initial_spawn_position = new Vector3(9999, 0, 0);
+        var initial_joint = Instantiate(joint_prefab, initial_spawn_position, joint_prefab.transform.rotation, transform);
         past_travels.Push(new TravelBacktrack(transform.position, initial_joint));
     }
 
@@ -69,11 +70,20 @@ public class PlayerController : MonoBehaviour
                 (new Vector2(hit.point.x, hit.point.z) - new Vector2(transform.position.x, transform.position.z))
                 .normalized * travel_speed;
 
-            transform.Translate(new Vector3(travel.x, 0, travel.y));
+            var travel_3d = new Vector3(travel.x, 0, travel.y);
+            var travel_location = transform.position + travel_3d;
+
+            if (VectorOutOfBounds(travel_location))
+            {
+                return;
+            }
+
+            transform.Translate(travel_3d);
 
             if (save_tick == save_tick_resolution)
             {
-                var joint = Instantiate(joint_prefab);
+                var initial_spawn_position = new Vector3(9999, 0, 0);
+                var joint = Instantiate(joint_prefab, initial_spawn_position, joint_prefab.transform.rotation, transform);
                 past_travels.Push(new TravelBacktrack(transform.position, joint));
                 save_tick = 0;
             }
@@ -98,5 +108,17 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 diff = current_position - position;
         return Vector3.Dot(diff, new Vector3(direction.x, 0, direction.y)) <= 0;
+    }
+
+    bool VectorOutOfBounds(Vector3 travel)
+    {
+        var west = GameObject.FindWithTag("WallWest").transform.position;
+        var east = GameObject.FindWithTag("WallEast").transform.position;
+        var north = GameObject.FindWithTag("WallNorth").transform.position;
+        var south = GameObject.FindWithTag("WallSouth").transform.position;
+
+        return !(
+            west.x < travel.x && east.x > travel.x && north.z > travel.z && south.z < travel.z
+        );
     }
 }

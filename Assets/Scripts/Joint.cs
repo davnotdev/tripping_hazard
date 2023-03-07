@@ -27,4 +27,12 @@ public class Joint : MonoBehaviour
             : Mathf.Atan(diff.z / diff.x) * (180 / Mathf.PI);
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, -θ, transform.eulerAngles.z);
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Victim"))
+        {
+            Debug.Log("You suck (because you got hit)");
+        }
+    }
 }

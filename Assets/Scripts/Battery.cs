@@ -37,12 +37,13 @@ public class Battery : MonoBehaviour
         if (battery_percentage <= 0)
         {
             //  TODO: Lose Condition.
-            Debug.Log("You suck!");
+            Debug.Log("You suck (because you let the battery die)");
             return;
         }
 
         if (player_is_charging)
         {
+            Debug.Log("You are charging.");
             battery_percentage += 1;
         }
         else
