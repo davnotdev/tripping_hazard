@@ -4,11 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - WallNorth
-  - WallSouth
-  - WallWest
-  - WallEast
   - Victim
+  - Wall
   layers:
   - Default
   - TransparentFX

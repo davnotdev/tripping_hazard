@@ -27,7 +27,9 @@ public class PlayerController : MonoBehaviour
     private const float travel_speed = 0.1f;
     private const uint save_tick_resolution = 12;
     private uint save_tick = 0;
-
+    private Vector3 normalized_tangental_direction;
+    private bool has_hit_wall = false;
+    private Vector3 has_hit_wall_direction;
     private Stack<TravelBacktrack> past_travels;
 
     void Start()
@@ -71,12 +73,17 @@ public class PlayerController : MonoBehaviour
                 .normalized * travel_speed;
 
             var travel_3d = new Vector3(travel.x, 0, travel.y);
-            var travel_location = transform.position + travel_3d;
+            var normalized_direction = travel_3d.normalized;
 
-            if (VectorOutOfBounds(travel_location))
+            if (has_hit_wall && Vector3.Dot(normalized_direction, normalized_tangental_direction) > 0)
             {
                 return;
             }
+
+            has_hit_wall = false;
+
+            normalized_tangental_direction = normalized_direction;
+            var travel_location = transform.position + travel_3d;
 
             transform.Translate(travel_3d);
 
@@ -110,15 +117,20 @@ public class PlayerController : MonoBehaviour
         return Vector3.Dot(diff, new Vector3(direction.x, 0, direction.y)) <= 0;
     }
 
-    bool VectorOutOfBounds(Vector3 travel)
+    void OnTriggerEnter(Collider other)
     {
-        var west = GameObject.FindWithTag("WallWest").transform.position;
-        var east = GameObject.FindWithTag("WallEast").transform.position;
-        var north = GameObject.FindWithTag("WallNorth").transform.position;
-        var south = GameObject.FindWithTag("WallSouth").transform.position;
+        if (other.CompareTag("Wall"))
+        {
+            has_hit_wall = true;
+            has_hit_wall_direction = normalized_tangental_direction;
+        }
+    }
 
-        return !(
-            west.x < travel.x && east.x > travel.x && north.z > travel.z && south.z < travel.z
-        );
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Wall"))
+        {
+            has_hit_wall = false;
+        }
     }
 }
